@@ -1,7 +1,7 @@
 import express from 'express';
-import userHandler from './handlers/user.js'
+import register from './handlers/user.js'
 const routes = express.Router();
 
-routes.get('/user', userHandler);
+routes.get('/register', register);
 
 export default routes;
