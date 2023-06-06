@@ -13,18 +13,22 @@ const validateLength = (text, min, max) => {
 };
 
 const validateUsername = async (username) => {
-  let a = false;
+  const maxIterations = 100; // Set a maximum iteration count
+  let iteration = 0;
 
-  do {
-    let check = await User.findOne({ username });
+  while (iteration < maxIterations) {
+    const check = await User.findOne({ username });
+
     if (check) {
-      //change username
+      // Change username if it already exists
       username += (+new Date() * Math.random()).toString().substring(0, 1);
-      a = true;
     } else {
-      a = false;
+      break;
     }
-  } while (a);
+
+    iteration++;
+  }
+
   return username;
 };
 
